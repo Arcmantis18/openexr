@@ -545,7 +545,7 @@ inline bool
 operator!= (
     const ChannelList::ConstIterator& x, ChannelList::Iterator& y)
 {
-    return !(x._i == y,_i);
+    return !(x._i == y._i);
 }
 
 OPENEXR_IMF_INTERNAL_NAMESPACE_HEADER_EXIT
