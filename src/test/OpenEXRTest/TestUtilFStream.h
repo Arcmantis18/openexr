@@ -103,8 +103,12 @@ inline void
 OpenStreamWithUTF8Name (
     StreamType& is, const char* filename, std::ios_base::openmode mode)
 {
-#    ifdef _WIN32
+#   ifdef _WIN32
+#   pragma warning(push)
+#   pragma warning(disable: 4996)
+
     std::wstring wfn = OPENEXR_IMF_INTERNAL_NAMESPACE::WidenFilename (filename);
+
 #        ifdef USE_WIDEN_FILEBUF
     using CharT   = typename StreamType::char_type;
     using TraitsT = typename StreamType::traits_type;
@@ -119,6 +123,10 @@ OpenStreamWithUTF8Name (
 #    else
     is.rdbuf ()->open (filename, mode);
 #    endif
+
+#   ifdef _WIN32
+#   pragma warning(pop)
+#   endif
 }
 
 } // namespace testutil
